@@ -1,0 +1,102 @@
+html{
+    background-color: darkslategray;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+body{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+header {
+  background-color: #333; 
+  color: #fff; /* Text color */
+  padding-left: 5vw; 
+  padding-right: 5vw; 
+  padding-top: 3vh; 
+  padding-bottom: 2vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack items vertically */
+  width: 100%;
+  margin-bottom: 5vh;
+}
+
+
+footer {
+    background-color: #333; /* Footer background color */
+    color: #fff; /* Text color */
+    padding: 1rem; /* Adjust padding as needed */
+    position: fixed; /* Fixed position */
+    bottom: 0; /* Align to the bottom of the viewport */
+    left: 0;
+    width: 100%; /* Full width */
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    height: 5vh;
+  }
+
+footer pre {
+    margin: 0; /* Remove default margin */
+    margin-right: 15vw;
+    font-family: 'Courier New', Courier, monospace; /* Use monospace font for <pre> */
+}
+
+
+.headerelement {
+  margin: 0 0 5px 0; 
+}
+
+.container {
+  display: flex;
+  margin-top: 2rem; /* Adjust margin as needed */
+  flex-flow: column;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+
+  background-color: antiquewhite;
+  border-radius: 10px;
+  width: 70vw;
+  height: 60vh;
+  margin-bottom: 3vh;
+  margin-left: 6vw;
+}
+
+/* CSS for child divs */
+.container > div {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  width: 80%; /* Adjust width as per your preference */
+  text-align: center;
+  margin: 5px;
+  
+}
+
+.container > div:hover{
+  padding: 1rem;
+  border: 1px solid white;
+  width: 80%; /* Adjust width as per your preference */
+  text-align: center;
+  margin: 5px;
+  background-color: palevioletred;
+  transition-duration: 1s;
+  
+}
+
+
+#spc:hover{
+  padding: 2rem;
+  color: white;
+}
+
