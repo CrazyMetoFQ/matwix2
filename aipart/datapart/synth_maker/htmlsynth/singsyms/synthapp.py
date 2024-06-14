@@ -15,7 +15,7 @@ justify_items = ["flex-start", 'center', "flex-end"]
 
 all_things = (font_familys,font_styles, font_sizes,font_weights,align_items, justify_items)
 
-totn = 3
+totn = 5
 all_l = [[random.choice(i) for i in all_things] for _ in range(totn)]
 
 # def rnd_l():
@@ -34,7 +34,7 @@ class items_stuff:
   symbs = "+-*/.()<>"
 
   # all_stuff = alphabets_L+alphabets_U+nums
-  all_stuff = nums+symbs
+  all_stuff = nums
 
 
 

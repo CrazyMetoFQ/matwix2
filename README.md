@@ -1,2 +1,2 @@
 # mthwix2
- tri2 formthwix
+ tri2 for mthwix
