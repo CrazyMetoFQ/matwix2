@@ -12,14 +12,36 @@
     </div> -->
 
     <header>
-        <p class="headerelement" style="font-size: 3rem;">Math Wiz</p>
+        <p class="headerelement" style="font-size: 3rem;"><a href="/">Math Wiz</a></p>
         <p class="headerelement" style="font-size: 1rem;">GRP 2- AI PROJECT</p>
 
     </header>
 
     <div class="container">
         <div id="spc">Hello Vro, Pls Upload Img.</div>
-        <div>Solution.</div>
+
+        <form method="POST" enctype="multipart/form-data" id="mainForm">
+
+            <input type="file" name="imageUpload" id="fbtn"/>
+            <label for="fbtn" id="fbtnlbl">Oy Nigger UPload na wut u waiting 4</label>
+            <br>
+            <input type="submit" value="Upload" id="upbtn"/>
+            <label for="upbtn" id="upbtnlbl">send</label>
+
+        </form>
+
+
+        <div>
+            
+            <span>Solution.</span>
+            
+            {% if filename %}
+                <img src="/static/uploads/{{filename}}" alt="Uploaded Image">
+
+                <span> <a href="/img_mod/{{filename}}">go calc</a></span>
+            {% endif %}
+            
+        </div>
     </div>
 
     <footer>
@@ -31,13 +53,17 @@
     </footer>
 
     <script>
-        document.getElementById("spc").addEventListener("mouseover", function() {
-    this.innerText = "NIGGER JUST DO IT";
-});
+        function send_post() {
 
-document.getElementById("spc").addEventListener("mouseout", function() {
-    this.innerText = "Hello Vro, Pls Upload Img";
-});
+                    let data = {element: "barium"};
+
+                    fetch(document.URL, {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify("data")
+                    })
+
+                    };        
     </script>
 </body>
 </html>

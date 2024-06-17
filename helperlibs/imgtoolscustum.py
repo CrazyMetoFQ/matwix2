@@ -1,5 +1,7 @@
+import PIL.Image
 import numpy as np
 import matplotlib.pyplot as plt
+
 
 
 def find_neighbour(img, index, to_detect =1): 
@@ -173,13 +175,13 @@ def find_all_islands(img):
     return all_islands
 
 
-def convert_img_2bw(img): # grayscale inverse
+def convert_img_2bw(img, slack=0.5): # grayscale inverse
     
     img = np.array(img)
 
     img = img/255
-    img[img>0.5] = 1
-    img[img<0.5] = 0
+    img[img>=slack] = 1
+    img[img<slack] = 0
     img = (img-1) *-1
     img = img.astype(np.uint8)
     
@@ -203,7 +205,7 @@ def blob2img(blob, padding=3):
     
     (height, width), (top,bottom, left, right) = get_blob_info(blob)
     
-    subimg = np.zeros((height+ padding*2, width+ padding*2))
+    subimg = np.zeros((height+ 1+ padding*2, width+ 1+padding*2))
     
     for index in blob:
         
@@ -212,7 +214,7 @@ def blob2img(blob, padding=3):
     return subimg
 
 
-def show_subimgs_onRow(subimgs):
+def show_subimgs_onRow(subimgs, savet=False):
     fig = plt.figure(figsize=(8, 8))
 
     columns = len(subimgs)
@@ -225,9 +227,120 @@ def show_subimgs_onRow(subimgs):
         plt.yticks([])
         plt.xticks([])
 
-    plt.show()
+    if savet==False:
+        plt.show()
+    else:
+        plt.savefig(savet, dpi=600)
     
+
+
+def split_img(img):
     
+    """
+    splits image into subimgs based on islands
+    * removes same reigon duplicates
+    """
+    
+    segments = find_all_islands(img)
+
+
+    segments = sorted(segments, key= lambda i: min(i, key=lambda ind: ind[1])[1]) # sort based on top left corner
+
+
+    subimgs = [blob2img(blob) for blob in segments]
+
+    return subimgs
+
+
+
+
+def split_img_woDuplicate(img, padding=3):
+
+    """
+    split imgs into subimgs while removing duplicates from the same region
+    """
+
+    segments = find_all_islands(img)
+    segments = sorted(segments, key= lambda i: min(i, key=lambda ind: ind[1])[1]) # sort based on top left corner
+    subimgs = [blob2img(blob) for blob in segments]
+
+
+    # remove same region duplicates
+    prev_subimg_ = subimgs[0]
+    for sn, subimg in enumerate(subimgs[1:], start=1):
+        
+        
+        blob1_info = get_blob_info(segments[sn-1])
+        blob2_info = get_blob_info(segments[sn])
+            
+        # if np.array_equal(prev_subimg_,subimg):
+        if blob1_info[1][2] == blob2_info[1][2] and blob1_info[1][3] == blob2_info[1][3]: # same left & right
+            
+            
+            # print("HIT",sn)
+
+            ntop = blob1_info[1][0]
+            nbottom = blob2_info[1][1]
+            nleft = blob1_info[1][2]   #since same selft right shuld be same for both ?
+            nright = blob2_info[1][3]
+            
+            
+            # print(blob1_info)
+            # print(blob2_info)
+            # print(ntop, nbottom, nleft, nright)
+        
+            nheight = nbottom -ntop
+            nwidth = nright-nleft
+            
+            # print(nheight, nwidth)
+            
+            new_subimg = np.zeros(( nheight + padding*2, nwidth + padding*2))
+        
+            for index in segments[sn].union(segments[sn-1]):
+                
+                new_subimg[index[0] - ntop + padding][index[1] - nleft + padding] = 1
+            
+
+            try:
+                subimgs[sn] = new_subimg
+                subimgs.pop(sn-1)
+            except:
+                print(sn)
+                break
+            
+        else:
+            pass
+        
+        
+        prev_subimg_ = subimg
+        
+    
+    return subimgs        
+        
+        
+        
+        
+        
+def combine_images_row(images):
+    """
+    WARNING USES PIL OUTPUT IS PIL ASWELL
+    """
+    
+    images = [PIL.Image.fromarray(img) for img in images]
+
+    total_width = sum(image.width for image in images)
+    max_height = max(image.height for image in images)
+
+    combined_image = PIL.Image.new('RGB', (total_width+(5*len(images))+5, max_height), color=(255,255,0))
+
+    x_offset = 5
+    for image in images:
+        combined_image.paste(image, (x_offset, 0))
+        x_offset += image.width+5
+
+    return combined_image
+
+
 # img = np.array(
 #     [
 #         [1,1,0,0,0],

@@ -203,7 +203,7 @@ def blob2img(blob, padding=3):
     
     (height, width), (top,bottom, left, right) = get_blob_info(blob)
     
-    subimg = np.zeros((height+ padding*2, width+ padding*2))
+    subimg = np.zeros((height+ 1+ padding*2, width+ 1+padding*2))
     
     for index in blob:
         

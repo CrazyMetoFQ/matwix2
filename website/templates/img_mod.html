@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Img Mod</title>
+</head>
+<body>
+    
+    <header>
+
+        <a href="/">MATH WIX</a>
+    </header>
+
+
+    <div id="mainCont">
+
+        <div id="og-img">
+            <img src="/static/uploads/{{imgname}}" id="og-img_img">
+        </div>
+
+        <div class="slider-container">
+            <label for="slider1" class="slider-label">Slider 1:</label>
+            <input type="range" id="slider1" min="0" max="100" value="50" oninput="updateValue('slider1', 'value1')">
+            <span id="value1">50</span>
+        </div>
+    
+        <div class="slider-container">
+            <label for="slider2" class="slider-label">Slider 2:</label>
+            <input type="range" id="slider2" min="0" max="100" value="50" oninput="updateValue('slider2', 'value2')">
+            <span id="value2">50</span>
+        </div>
+    
+        <div class="slider-container">
+            <label for="slider3" class="slider-label">Slider 3:</label>
+            <input type="range" id="slider3" min="0" max="100" value="50" oninput="updateValue('slider3', 'value3')">
+            <span id="value3">50</span>
+        </div>
+        
+        
+        <button onclick="sendSliderValues()">Send Values</button>
+
+
+        <div id="modded-img">
+            <img src="/static/uploads/{{modded_img_name}}">
+        </div>
+
+        <div id="computed-vals">
+
+            <p>
+                {{computed_values}}
+            </p>
+
+        </div>
+
+        <script>
+            function updateValue(sliderId, valueId) {
+                var slider = document.getElementById(sliderId);
+                var valueSpan = document.getElementById(valueId);
+                valueSpan.innerText = slider.value;
+            }
+
+            function sendSliderValues() {
+                const slider1Value = document.getElementById('slider1').value;
+                const slider2Value = document.getElementById('slider2').value;
+                const slider3Value = document.getElementById('slider3').value;
+
+                const data = {
+                    slider1: slider1Value,
+                    slider2: slider2Value,
+                    slider3: slider3Value
+                };
+
+                fetch(window.location, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }  
+
+        </script>
+
+</body>
+</html>

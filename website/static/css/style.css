@@ -71,6 +71,8 @@ footer pre {
   height: 60vh;
   margin-bottom: 3vh;
   margin-left: 6vw;
+
+  gap: 10px;
 }
 
 /* CSS for child divs */
@@ -100,3 +102,38 @@ footer pre {
   color: white;
 }
 
+
+label{
+  padding: 1rem;
+  border: 1px solid #ccc;
+  width: 80%;
+  text-align: center;
+  background: burlywood;
+  display: flex;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+
+
+label:hover{
+  padding: 1rem;
+  border: 1px solid #ccc;
+  width: 80%;
+  text-align: center;
+  display: flex;
+  background-color: palevioletred;
+  transition-duration: 0.5s;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+
+
+a {
+  color: inherit;
+  text-decoration: inherit; /* no underline */
+}

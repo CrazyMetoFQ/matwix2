@@ -11,8 +11,8 @@ symbs_s = "+-/*=()"
 
 font_familys =  ["serif","sans-serif","cursive","fantasy","monospace","Perpetua","Monaco","Didot","Brush Script","Copperplate","Comic Sans","Arial"]
 font_styles  =  ["normal","italic"]
-font_sizes = range(35,54,1)
-font_weights =  range(100,1001, 100)
+font_sizes = range(35,60,1)
+font_weights =  range(100,851, 50)
 align_items = ["flex-start", 'center', "flex-end"]
 justify_items = ["flex-start", 'center', "flex-end"]
 

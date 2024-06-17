@@ -15,7 +15,7 @@ justify_items = ["flex-start", 'center', "flex-end"]
 
 all_things = (font_familys,font_styles, font_sizes,font_weights,align_items, justify_items)
 
-totn = 5
+totn = 15
 all_l = [[random.choice(i) for i in all_things] for _ in range(totn)]
 
 # def rnd_l():
@@ -31,10 +31,10 @@ class items_stuff:
   alphabets_L = alphabets_U.lower()
 
   nums = "1234567890"
-  symbs = "+-*/.()<>"
+  symbs = "+-*/()"
 
   # all_stuff = alphabets_L+alphabets_U+nums
-  all_stuff = nums
+  all_stuff = nums+symbs
 
 
 
@@ -119,13 +119,13 @@ def index():
     else:
       sym_text,imno,sl = item
       
-      svnm = sym_text
-      if sym_text.isnumeric():
-        svnm += "-n"
-      if sym_text.isupper():
-        svnm += "-u"
-      if sym_text.islower():
-        svnm += "-l"
+      svnm = sym_text.replace("*", "[multiply]").replace("/", "[divideforward]")
+      # if sym_text.isnumeric():
+      #   svnm += "-n"
+      # if sym_text.isupper():
+      #   svnm += "-u"
+      # if sym_text.islower():
+      #   svnm += "-l"
   
   if cstate == True:
     return render_template("index.html",
